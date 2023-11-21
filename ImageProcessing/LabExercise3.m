@@ -94,6 +94,5 @@ stem(tti,xr1linear)
 xxlinear = linearInterpolation(xx3, 3);
 figure
 imshow(xxlinear)
-title("Image after downsampling and linear interpolation")
 
 
