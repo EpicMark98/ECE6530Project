@@ -4,8 +4,10 @@
 %% 3.1 a)
 load lighthouse;
 show_img(xx);
+title('Original Lighthouse Image');
 xxDownsampled = xx(1:2:end, 1:2:end);
 show_img(xxDownsampled);
+title('Lighthouse Image Downsampled by 2');
 % The fence shows the aliasing effects most dramatically
 
 %% b)
@@ -37,6 +39,7 @@ ylabel('Magnitude');
 %% 3.2
 xx3 = xx(1:3:end, 1:3:end);
 show_img(xx3);
+title('Lighthouse Image Downsampled by 3');
 
 %% (a)
 
@@ -67,6 +70,7 @@ for i=1:xx3Size(1)
     xholdrows(i, :) = xx3(i, rowwiseSamplePoints);
 end
 show_img(xholdrows);
+title('Image With Rows Reconstructed by Zero-Order Hold');
 
 % whos %(this prints the sizes of variables)
 % xx3 is 109x142 and xholdrows is 109x426
@@ -80,6 +84,7 @@ for j=1:xholdrowsSize(2)
     xhold(:, j) = xholdrows(columnwiseSamplePoints, j);
 end
 show_img(xhold);
+title('Image Reconstructed with Zero-Order Hold');
 
 % xhold looks like a very pixelated version of 'lighthouse'.
 % It has the same resolution as the original but also
@@ -92,11 +97,13 @@ tti = 0:0.1:6;   %-- locations between the n1 indices
 xr1linear = interp1(n1,xr1,tti);   %-- function is INTERP-ONE
 figure
 stem(tti,xr1linear)
+title('Example of Linear Interpolation');
 % As can be seen by tti = 0:0.1:6;, the interpolation factor is 1/0.1 = 10.
 
 %% (e)
 xxlinear = linearInterpolation(xx3, 3);
 show_img(xxlinear);
+title('Reconstruction with Linear Interpolation');
 
 %% (f)
 % xxlinear is a pixelated version of 'lighthouse'. It looks very similar
