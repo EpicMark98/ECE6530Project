@@ -1,14 +1,14 @@
 %% Lab Exercise 3
 % This exercise is about downsampling and reconstruction
 
-% Part a)
+%% 3.1 a)
 load lighthouse;
 show_img(xx);
 xxDownsampled = xx(1:2:end, 1:2:end);
 show_img(xxDownsampled);
 % The fence shows the aliasing effects most dramatically
 
-% Part b)
+%% b)
 % The fence posts act as a high freqency component.
 % When we perform the downsampling, those high freqencies alias
 % to a much lower frequency, causing the distortion. To avoid aliasing,
@@ -35,11 +35,8 @@ xlabel('Frequency (rad/sample)');
 ylabel('Magnitude');
 
 %% 3.2
-xxSize = size(xx);
-xx3 = xx(1:3:xxSize(1), 1:3:xxSize(2));
-figure;
-% show_img(xx3);
-imshow(xx3);
+xx3 = xx(1:3:end, 1:3:end);
+show_img(xx3);
 
 %% (a)
 
@@ -69,8 +66,11 @@ xholdrows = zeros(xx3Size(1), 3*xx3Size(2));
 for i=1:xx3Size(1)
     xholdrows(i, :) = xx3(i, rowwiseSamplePoints);
 end
-figure
-imshow(xholdrows)
+show_img(xholdrows);
+
+% whos %(this prints the sizes of variables)
+% xx3 is 109x142 and xholdrows is 109x426
+% xholdrows looks just like xx3 except it is stretched horizontally
 
 %% (c) 
 xholdrowsSize = size(xholdrows);
@@ -79,8 +79,11 @@ xhold = zeros(3*xholdrowsSize(1), xholdrowsSize(2));
 for j=1:xholdrowsSize(2)
     xhold(:, j) = xholdrows(columnwiseSamplePoints, j);
 end
-figure
-imshow(xhold)
+show_img(xhold);
+
+% xhold looks like a very pixelated version of 'lighthouse'.
+% It has the same resolution as the original but also
+% includes the aliasing artifacts introduced by downsampling.
 
 %% (d)
 n1 = 0:6;
@@ -91,8 +94,25 @@ figure
 stem(tti,xr1linear)
 % As can be seen by tti = 0:0.1:6;, the interpolation factor is 1/0.1 = 10.
 
+%% (e)
 xxlinear = linearInterpolation(xx3, 3);
-figure
-imshow(xxlinear)
+show_img(xxlinear);
 
+%% (f)
+% xxlinear is a pixelated version of 'lighthouse'. It looks very similar
+% but many details were lost in the orignal downsampling.
+% The reconstruction process has smoothed the edges of the original image.
+% Linear interpolation is incapable of removing the aliasing effects.
+
+%% (g)
+% The zero-order hold generally looks more pixelated than the linear
+% interpolation but it is a little better at preserving the sharper
+% edges of the original image.
+% The biggest area of difference is along the fence, which is a high
+% frequency component. The zero-order hold makes the edges appear sharper
+% while the linear imterpolation smoothes it instead. The low frequency
+% areas of the image, like the sky or the bricks on the lighthouse, looks
+% about the same between the two reconstruction methods.
+% Both methods work best for low frequency components and each has a 
+% different effect on high frequency components.
 
