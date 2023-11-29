@@ -9,7 +9,7 @@ function y = linearInterpolation(x, interpolationFactor)
     for i=1:xSize(1)
         y1(i, :) = interp1(1:xSize(2), x(i, :), rowwiseSamplePoints);
     end
-    y1 = y1'; % trasnpose 
+    y1 = y1'; % transpose 
     
     y1Size = size(y1);
     y2 = zeros(y1Size(1), interpolationFactor*(y1Size(2)-1) + 1);

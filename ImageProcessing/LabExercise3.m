@@ -1,11 +1,11 @@
 %% Lab Exercise 3
-% This exercise is about downsampling and reconstruction
+% This exercise is about downsampling and reconstruction of an image
 
 %% 3.1 a)
-load lighthouse;
+load lighthouse;    % Load image into Matlab 2-D array
 show_img(xx);
 title('Original Lighthouse Image');
-xxDownsampled = xx(1:2:end, 1:2:end);
+xxDownsampled = xx(1:2:end, 1:2:end);   % Take every other sample
 show_img(xxDownsampled);
 title('Lighthouse Image Downsampled by 2');
 % The fence shows the aliasing effects most dramatically
@@ -18,31 +18,13 @@ title('Lighthouse Image Downsampled by 2');
 % the highest frequency, or we must send the image through a low-pass
 % filter so that condition is still satisfied.
 
-% NOTE: I was hoping that the following code would show some aliasing but
-% you can't really see anything.
-row = xx(200,:);
-rowDownsampled = xxDownsampled(100,:);
-rowFreq = fftshift(fft(row));
-rowDownFreq = fftshift(fft(rowDownsampled));
-figure;
-subplot(2,1,1);
-plot(-pi:(2*pi/425):pi,abs(rowFreq));
-title('Frequency Response of Original Image');
-xlabel('Frequency (rad/sample)');
-ylabel('Magnitude');
-subplot(2,1,2);
-plot(-pi:(2*pi/212):pi,abs(rowDownFreq));
-title('Frequency Response of Downsampled Image');
-xlabel('Frequency (rad/sample)');
-ylabel('Magnitude');
-
 %% 3.2
 xx3 = xx(1:3:end, 1:3:end);
 show_img(xx3);
 title('Lighthouse Image Downsampled by 3');
 
 %% (a)
-
+% This section of code demonstrates a zero order hold
 xr1 = (-2) .^ (0:6);
 L = length(xr1);
 nn = ceil((0.999:1:4*L)/4);
@@ -77,6 +59,7 @@ title('Image With Rows Reconstructed by Zero-Order Hold');
 % xholdrows looks just like xx3 except it is stretched horizontally
 
 %% (c) 
+% Use zero order hold to reconstruct the image
 xholdrowsSize = size(xholdrows);
 columnwiseSamplePoints = ceil((0.999:1:3*xholdrowsSize(1))/3);
 xhold = zeros(3*xholdrowsSize(1), xholdrowsSize(2));
@@ -91,6 +74,7 @@ title('Image Reconstructed with Zero-Order Hold');
 % includes the aliasing artifacts introduced by downsampling.
 
 %% (d)
+% This section of code demonstrates a linear interpolation
 n1 = 0:6;
 xr1 = (-2).^n1;
 tti = 0:0.1:6;   %-- locations between the n1 indices
