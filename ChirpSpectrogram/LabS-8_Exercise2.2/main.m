@@ -86,7 +86,7 @@ colorbar
 grid on
 title('10ms Triangle dB Spectrogram')
 
-%%
+%%%
 % All of the spectrum lines are now clearly visable. The pattern from the
 % first time, 100Hz then every 200Hz after that, is still present, but now
 % it extends well past 1,000Hz and is now visible all the way to the 
@@ -106,7 +106,7 @@ plotspecDB(xx + 1j*1e-12, fSamp, lSect, 80)
 colorbar
 grid on
 title('20ms Triangle dB Spectrogram')
-%%
+%%%
 % WThe fundamental frequency is now 50Hz. The highest spectrum band is at 
 % 4,950Hz, which is the 50th harmonic line.
 

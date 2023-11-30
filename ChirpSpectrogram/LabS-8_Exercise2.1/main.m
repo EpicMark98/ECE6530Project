@@ -30,7 +30,7 @@ figure
 plotspec(cc + 1j*1e-12, fSamp, lSect)
 colorbar
 grid on
-%%
+%%%
 % L_sect represents a certain number of samples. Since the sampling rate is
 % 4000Hz, which is a sampling period of 0.25ms, the T_sect is L_sect times
 % the sampling period (lSect*dt) which is 32ms when L_sect equals 128.
