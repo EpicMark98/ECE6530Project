@@ -8,7 +8,11 @@ title('Original Lighthouse Image');
 xxDownsampled = xx(1:2:end, 1:2:end);   % Take every other sample
 show_img(xxDownsampled);
 title('Lighthouse Image Downsampled by 2');
-% The fence shows the aliasing effects most dramatically
+% Visually, aliasing appears when objects seem to merge together or morph
+% into something different. Information about objects in the image is lost
+% when there is aliasing. The downsampled image is more jagged, especially
+% when there are straight lines in the original image. The fence shows the
+% aliasing effects most dramatically.
 
 %% b)
 % The fence posts act as a high freqency component.
@@ -17,6 +21,13 @@ title('Lighthouse Image Downsampled by 2');
 % we must either increase our sampling frequency to at least twice
 % the highest frequency, or we must send the image through a low-pass
 % filter so that condition is still satisfied.
+%
+% In terms of cycles per pixel, when downsampling by two, the sample rate
+% is 1 sample per 2 pixels or 0.5 samples per pixel. To avoid aliasing, we
+% need to have a signal have 0.25 samples per pixel or less. Equivalently,
+% we need the signal to have a period of 4 pixels or more. If we inspect
+% the fence, we can see aliasing happens when there are more than one fence
+% post per 4 pixels.
 
 %% 3.2
 xx3 = xx(1:3:end, 1:3:end);
@@ -28,8 +39,6 @@ title('Lighthouse Image Downsampled by 3');
 xr1 = (-2) .^ (0:6);
 L = length(xr1);
 nn = ceil((0.999:1:4*L)/4);
-% Note nn holds the values for 4 samples: 1, 1, 1, 1, 2, 2, 2, 2, ...
-% The interpolation factor is 4
 xr1hold = xr1(nn);
 figure;
 stem(0:length(xr1)-1, xr1)
@@ -38,14 +47,18 @@ figure;
 stem(0:length(xr1hold)-1, xr1hold)
 title("Plot of xr1 with 4-point zero order hold")
 
+% Note nn holds the values for 4 samples: 1, 1, 1, 1, 2, 2, 2, 2, ...
+% The interpolation factor is 4 because one point from the original signal
+% corresponds to 4 points after interpolation. The plot shows this idea.
+
 %% (b) Zero-order hold
 
-% expand it horizontally, along the rows
+% For xholdrows, we expand downsamples image horizontally, along the rows.
 
-% when using size(), the return value is an array of 2 elements. The first
+% When using size(), the return value is an array of 2 elements. The first
 % is the number of rows. The second is the number of elements.
 
-xx3Size = size(xx3);
+xx3Size = size(xx3); 
 rowwiseSamplePoints = ceil((0.999:1:3*xx3Size(2))/3);
 xholdrows = zeros(xx3Size(1), 3*xx3Size(2));
 for i=1:xx3Size(1)
