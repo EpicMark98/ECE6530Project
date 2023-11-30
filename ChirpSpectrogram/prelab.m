@@ -27,10 +27,10 @@ xx = Amp*(4/T)*(abs(qq-(0.5*T))-0.25*T);
 figure
 hold on
 plot(tt, xx, 'k-')
-axis([0, 2, -1, 1])
+axis([0, 1, -1, 1])
 ylabel('x(t_n)')
 xlabel('t_n')
-title('Chirp Signal')
+title('Triangle Signal')
 hold off
 
 %% Decibels
