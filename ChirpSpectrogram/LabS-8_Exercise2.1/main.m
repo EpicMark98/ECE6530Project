@@ -1,6 +1,6 @@
-%% Part 2.1 — Spectrogram for a Chirp that Aliases
+%% Sampling and Aliasing: Lab S-8: 2.1 Spectrogram for a Chirp that Aliases
 
-%% (a)
+%% 2.1a)
 % When the frequency continues to rise above half the sampling rate, the 
 % frequency aliases backwards, and will continue until it aliases to 0Hz 
 % and then will continue to oscillate.
@@ -9,7 +9,9 @@
 % F-sub-zero is the starting frequency, so f_0 = 1,000Hz
 % Phi is the phase offset, which is not defined, so we choose φ = 0
 
-%% (b)
+%% 2.1b)
+%  Here we generate a spectrogram using L_sect as 128
+
 fSamp = 4000; % Hertz
 dt = 1/fSamp; % seconds
 tStart = 0; % seconds
@@ -33,7 +35,7 @@ grid on
 % 4000Hz, which is a sampling period of 0.25ms, the T_sect is L_sect times
 % the sampling period (lSect*dt) which is 32ms when L_sect equals 128.
 
-%% (c)
+%% 2.1c)
 % As the frequency reaches half of the sampling frequency, the samples
 % occur at two equal amplitude but opposite sign points in the sinusoid. As
 % the frequency increases to exactly the sampling rate, the samples occur
