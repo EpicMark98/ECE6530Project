@@ -15,5 +15,10 @@ title("I'm half crazy all for the love of you")
 % After some testing, Tsect of 25ms gave the cleanest vowel lines.
 % Multiplying this by the sampling frequency gives the Lsect, which is
 % 1200.
-% <include>voice_spectrogram.png
+%
 % <<voice_spectrogram.png>>
+%
+
+%% 2.3.2)
+% The short 'a' vowel has a fundamental frequency of about 200Hz. This
+% corresponds to a fundamental period of 
