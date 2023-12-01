@@ -1,0 +1,153 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Sampling and Aliasing: Lab S-8: 2.3 &#8212; Decibel Spectrogram of Your Voice</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-12-01"><meta name="DC.source" content="main.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Sampling and Aliasing: Lab S-8: 2.3 &#8212; Decibel Spectrogram of Your Voice</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">2.3.1)</a></li><li><a href="#3">2.3.2)</a></li><li><a href="#4">2.3.3)</a></li><li><a href="#6">2.3.4)</a></li></ul></div><h2 id="1">2.3.1)</h2><p>Here we load in a 7-second voice sample to find the "AAH" sound and zoom in on it.</p><pre class="codeinput">load(<span class="string">'48000_bicycle_built_for_two.mat'</span>, <span class="string">'data'</span>);
+fSamp = 48000;
+vv = data(370000:end, 1)'; <span class="comment">% gets the left channel, second half of audio</span>
+tSect = 0.025;
+lSect = round(tSect*fSamp); <span class="comment">% must be an integer</span>
+<span class="comment">%soundsc(vv, fSamp);</span>
+figure
+plotspecDB(vv + 1j*1e-12, fSamp, lSect, 80)
+axis([1.25, 2.275, 0, fSamp/16])
+colorbar
+grid <span class="string">on</span>
+title(<span class="string">"'Half'"</span>)
+</pre><p>After some testing, Tsect of 25ms gave the cleanest vowel lines. Multiplying this by the sampling frequency gives the Lsect, which is 1200.</p><pre>T_sect = 0.025 s    L_sect = 1200 samples</pre><p><img vspace="5" hspace="5" src="voice_spectrogram.png" alt=""> </p><p>The 'a' vowel from the word "half" is annotated in the red box.</p><pre class="codeoutput">
+ans = 
+
+  Image with properties:
+
+           CData: [1200&times;598 double]
+    CDataMapping: 'scaled'
+
+  Use GET to show all properties
+
+</pre><img vspace="5" hspace="5" src="main_01.png" alt=""> <h2 id="3">2.3.2)</h2><p>The short 'a' vowel has a fundamental frequency of about 200Hz (G3). This corresponds to a fundamental period of 5ms.</p><pre>Fundamental Frequency = 200 Hz  Fundamental Period = 0.005 s</pre><h2 id="4">2.3.3)</h2><pre class="codeinput">figure
+plot(vv(69800:105600), <span class="string">'k-'</span>)
+axis([15150, 16150, -1, 1])
+title(<span class="string">"'a' Vowel"</span>)
+</pre><p>By directly measuring the distance between the peaks in the waveform, we found an average difference of 233 samples, which is 4.85ms. This is very close to the 5ms found in 2.3.2: a difference of only 6Hz.</p><img vspace="5" hspace="5" src="main_02.png" alt=""> <h2 id="6">2.3.4)</h2><p>By measuring the distances between peaks in the time domain plot, I was able to find a very accurate value for the fundamental period during that very small amount of time. By instead finding the fundamental frequency from the frequency domain plot, I could only find what seemed to be the middle of the darkest line, which may have made the measurement less accurate, however, the frequency domain gave a much better idea of what the average frequency over a large amount of time was.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Sampling and Aliasing: Lab S-8: 2.3 — Decibel Spectrogram of Your Voice
+
+%% 2.3.1)
+% Here we load in a 7-second voice sample to find the "AAH" sound and zoom
+% in on it.
+
+load('48000_bicycle_built_for_two.mat', 'data');
+fSamp = 48000;
+vv = data(370000:end, 1)'; % gets the left channel, second half of audio
+tSect = 0.025;
+lSect = round(tSect*fSamp); % must be an integer
+%soundsc(vv, fSamp);
+figure
+plotspecDB(vv + 1j*1e-12, fSamp, lSect, 80)
+axis([1.25, 2.275, 0, fSamp/16])
+colorbar
+grid on
+title("'Half'")
+%%%
+% After some testing, Tsect of 25ms gave the cleanest vowel lines.
+% Multiplying this by the sampling frequency gives the Lsect, which is
+% 1200.
+%
+%  T_sect = 0.025 s    L_sect = 1200 samples
+%
+% <<voice_spectrogram.png>>
+%
+% The 'a' vowel from the word "half" is annotated in the red box.
+
+%% 2.3.2)
+% The short 'a' vowel has a fundamental frequency of about 200Hz (G3). This
+% corresponds to a fundamental period of 5ms.
+% 
+%  Fundamental Frequency = 200 Hz  Fundamental Period = 0.005 s
+
+%% 2.3.3)
+figure
+plot(vv(69800:105600), 'k-')
+axis([15150, 16150, -1, 1])
+title("'a' Vowel")
+%%%
+% By directly measuring the distance between the peaks in the waveform, we
+% found an average difference of 233 samples, which is 4.85ms. This is very
+% close to the 5ms found in 2.3.2: a difference of only 6Hz.
+
+%% 2.3.4)
+% By measuring the distances between peaks in the time domain plot, I was
+% able to find a very accurate value for the fundamental period during
+% that very small amount of time. By instead finding the fundamental
+% frequency from the frequency domain plot, I could only find what seemed
+% to be the middle of the darkest line, which may have made the measurement
+% less accurate, however, the frequency domain gave a much better idea of
+% what the average frequency over a large amount of time was.
+
+##### SOURCE END #####
+--></body></html>

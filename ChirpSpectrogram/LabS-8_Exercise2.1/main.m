@@ -4,10 +4,15 @@
 % When the frequency continues to rise above half the sampling rate, the 
 % frequency aliases backwards, and will continue until it aliases to 0Hz 
 % and then will continue to oscillate.
+%
 % Mu is the half the slope of the change in frequency, so
-%   μ = (11,000Hz – 1,000Hz) ÷ (4s – 0s) ÷ 2 = 1,250
+% μ = (11,000Hz – 1,000Hz) ÷ (4s – 0s) ÷ 2 = 1,250
+%
 % F-sub-zero is the starting frequency, so f_0 = 1,000Hz
-% Phi is the phase offset, which is not defined, so we choose φ = 0
+% 
+% Phi is the phase offset, which is not defined, so we choose φ = 0.
+% 
+%  Chirp formula: cos(ψ(t)) = 2π(1250)t^2 + 2π(1000)t + 0
 
 %% 2.1b)
 %  Here we generate a spectrogram using L_sect as 128
@@ -34,6 +39,8 @@ grid on
 % L_sect represents a certain number of samples. Since the sampling rate is
 % 4000Hz, which is a sampling period of 0.25ms, the T_sect is L_sect times
 % the sampling period (lSect*dt) which is 32ms when L_sect equals 128.
+% 
+%  L_sect = 128 samples    T_sect = 0.032 s
 
 %% 2.1c)
 % As the frequency reaches half of the sampling frequency, the samples
@@ -46,6 +53,6 @@ grid on
 % the samples are taken slight further ahead in the cycle each time,
 % resulting in a small sampled frequency. This continues to increase until
 % reaching 1.5 times the sampling frequency where it is again sampling
-% opposite amplitutdes, but this time a cycle apart instead of within the
+% opposite amplitudes, but this time a cycle apart instead of within the
 % same cycle. The original effect then occurs and it cycles up and down,
 % never reaching the actual frequency being sampled.
