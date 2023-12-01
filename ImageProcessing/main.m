@@ -14,7 +14,7 @@ title('Lighthouse Image Downsampled by 2');
 % when there are straight lines in the original image. The fence shows the
 % aliasing effects most dramatically.
 
-%% b)
+%% 3.1 b)
 % The fence posts act as a high freqency component.
 % When we perform the downsampling, those high freqencies alias
 % to a much lower frequency, causing the distortion. To avoid aliasing,
@@ -34,7 +34,7 @@ xx3 = xx(1:3:end, 1:3:end);
 show_img(xx3);
 title('Lighthouse Image Downsampled by 3');
 
-%% (a)
+%% 3.2 a)
 % This section of code demonstrates a zero order hold
 xr1 = (-2) .^ (0:6);
 L = length(xr1);
@@ -51,7 +51,7 @@ title("Plot of xr1 with 4-point zero order hold")
 % The interpolation factor is 4 because one point from the original signal
 % corresponds to 4 points after interpolation. The plot shows this idea.
 
-%% (b) Zero-order hold
+%% 3.2 b)
 
 % For xholdrows, we expand downsamples image horizontally, along the rows.
 
@@ -71,7 +71,7 @@ title('Image With Rows Reconstructed by Zero-Order Hold');
 % xx3 is 109x142 and xholdrows is 109x426
 % xholdrows looks just like xx3 except it is stretched horizontally
 
-%% (c) 
+%% 3.2 c) 
 % Use zero order hold to reconstruct the image
 xholdrowsSize = size(xholdrows);
 columnwiseSamplePoints = ceil((0.999:1:3*xholdrowsSize(1))/3);
@@ -86,7 +86,7 @@ title('Image Reconstructed with Zero-Order Hold');
 % It has the same resolution as the original but also
 % includes the aliasing artifacts introduced by downsampling.
 
-%% (d)
+%% 3.2 d)
 % This section of code demonstrates a linear interpolation
 n1 = 0:6;
 xr1 = (-2).^n1;
@@ -97,18 +97,18 @@ stem(tti,xr1linear)
 title('Example of Linear Interpolation');
 % As can be seen by tti = 0:0.1:6;, the interpolation factor is 1/0.1 = 10.
 
-%% (e)
+%% 3.2 e)
 xxlinear = linearInterpolation(xx3, 3);
 show_img(xxlinear);
 title('Reconstruction with Linear Interpolation');
 
-%% (f)
+%% 3.2 f)
 % xxlinear is a pixelated version of 'lighthouse'. It looks very similar
 % but many details were lost in the orignal downsampling.
 % The reconstruction process has smoothed the edges of the original image.
 % Linear interpolation is incapable of removing the aliasing effects.
 
-%% (g)
+%% 3.2 g)
 % The zero-order hold generally looks more pixelated than the linear
 % interpolation but it is a little better at preserving the sharper
 % edges of the original image.
