@@ -9,8 +9,8 @@ To make changes, update the MATLAB code and republish this document.
 <title>Lab Exercise 3</title>
 <meta name="generator" content="MATLAB 23.2">
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
-<meta name="DC.date" content="2023-12-03">
-<meta name="DC.source" content="main.m">
+<meta name="DC.date" content="2023-11-30">
+<meta name="DC.source" content="LabExercise3.m">
 <style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
@@ -87,31 +87,31 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 <a href="#1">3.1 a)</a>
 </li>
 <li>
-<a href="#2">3.1 b)</a>
+<a href="#2">b)</a>
 </li>
 <li>
 <a href="#3">3.2</a>
 </li>
 <li>
-<a href="#4">3.2 a)</a>
+<a href="#4">(a)</a>
 </li>
 <li>
-<a href="#5">3.2 b)</a>
+<a href="#5">(b) Zero-order hold</a>
 </li>
 <li>
-<a href="#6">3.2 c)</a>
+<a href="#6">(c)</a>
 </li>
 <li>
-<a href="#7">3.2 d)</a>
+<a href="#7">(d)</a>
 </li>
 <li>
-<a href="#8">3.2 e)</a>
+<a href="#8">(e)</a>
 </li>
 <li>
-<a href="#9">3.2 f)</a>
+<a href="#9">(f)</a>
 </li>
 <li>
-<a href="#10">3.2 g)</a>
+<a href="#10">(g)</a>
 </li>
 </ul>
 </div>
@@ -131,7 +131,7 @@ title(<span class="string">'Lighthouse Image Downsampled by 2'</span>);
 <pre class="codeoutput">Image being scaled so that min value is 0 and max value is 255
 Image being scaled so that min value is 0 and max value is 255
 </pre>
-<img vspace="5" hspace="5" src="main_01.png" alt=""> <img vspace="5" hspace="5" src="main_02.png" alt=""> <h2 id="2">3.1 b)</h2>
+<img vspace="5" hspace="5" src="LabExercise3_01.png" alt=""> <img vspace="5" hspace="5" src="LabExercise3_02.png" alt=""> <h2 id="2">b)</h2>
 <p>The fence posts act as a high freqency component. When we perform the downsampling, those high freqencies alias to a much lower frequency, causing the distortion. To avoid aliasing, we must either increase our sampling frequency to at least twice the highest frequency, or we must send the image through a low-pass filter so that condition is still satisfied.</p>
 <p>In terms of cycles per pixel, when downsampling by two, the sample rate is 1 sample per 2 pixels or 0.5 samples per pixel. To avoid aliasing, we need to have a signal have 0.25 samples per pixel or less. Equivalently, we need the signal to have a period of 4 pixels or more. If we inspect the fence, we can see aliasing happens when there are more than one fence post per 4 pixels.</p>
 <h2 id="3">3.2</h2>
@@ -141,7 +141,7 @@ title(<span class="string">'Lighthouse Image Downsampled by 3'</span>);
 </pre>
 <pre class="codeoutput">Image being scaled so that min value is 0 and max value is 255
 </pre>
-<img vspace="5" hspace="5" src="main_03.png" alt=""> <h2 id="4">3.2 a)</h2>
+<img vspace="5" hspace="5" src="LabExercise3_03.png" alt=""> <h2 id="4">(a)</h2>
 <p>This section of code demonstrates a zero order hold</p>
 <pre class="codeinput">xr1 = (-2) .^ (0:6);
 L = length(xr1);
@@ -158,10 +158,9 @@ title(<span class="string">"Plot of xr1 with 4-point zero order hold"</span>)
 <span class="comment">% The interpolation factor is 4 because one point from the original signal</span>
 <span class="comment">% corresponds to 4 points after interpolation. The plot shows this idea.</span>
 </pre>
-<img vspace="5" hspace="5" src="main_04.png" alt=""> <img vspace="5" hspace="5" src="main_05.png" alt=""> <h2 id="5">3.2 b)</h2>
+<img vspace="5" hspace="5" src="LabExercise3_04.png" alt=""> <img vspace="5" hspace="5" src="LabExercise3_05.png" alt=""> <h2 id="5">(b) Zero-order hold</h2>
 <pre class="codeinput">
-<span class="comment">% For xholdrows, we expand the downsampled image horizontally, along the</span>
-<span class="comment">% rows.</span>
+<span class="comment">% For xholdrows, we expand downsamples image horizontally, along the rows.</span>
 
 <span class="comment">% When using size(), the return value is an array of 2 elements. The first</span>
 <span class="comment">% is the number of rows. The second is the number of elements.</span>
@@ -181,7 +180,7 @@ title(<span class="string">'Image With Rows Reconstructed by Zero-Order Hold'</s
 </pre>
 <pre class="codeoutput">Image being scaled so that min value is 0 and max value is 255
 </pre>
-<img vspace="5" hspace="5" src="main_06.png" alt=""> <h2 id="6">3.2 c)</h2>
+<img vspace="5" hspace="5" src="LabExercise3_06.png" alt=""> <h2 id="6">(c)</h2>
 <p>Use zero order hold to reconstruct the image</p>
 <pre class="codeinput">xholdrowsSize = size(xholdrows);
 columnwiseSamplePoints = ceil((0.999:1:3*xholdrowsSize(1))/3);
@@ -198,7 +197,7 @@ title(<span class="string">'Image Reconstructed with Zero-Order Hold'</span>);
 </pre>
 <pre class="codeoutput">Image being scaled so that min value is 0 and max value is 255
 </pre>
-<img vspace="5" hspace="5" src="main_07.png" alt=""> <h2 id="7">3.2 d)</h2>
+<img vspace="5" hspace="5" src="LabExercise3_07.png" alt=""> <h2 id="7">(d)</h2>
 <p>This section of code demonstrates a linear interpolation</p>
 <pre class="codeinput">n1 = 0:6;
 xr1 = (-2).^n1;
@@ -209,17 +208,16 @@ stem(tti,xr1linear)
 title(<span class="string">'Example of Linear Interpolation'</span>);
 <span class="comment">% As can be seen by tti = 0:0.1:6;, the interpolation factor is 1/0.1 = 10.</span>
 </pre>
-<img vspace="5" hspace="5" src="main_08.png" alt=""> <h2 id="8">3.2 e)</h2>
-<p>The function linearInterpolation() is used to perform linear interpolation on the lighthouse image.</p>
+<img vspace="5" hspace="5" src="LabExercise3_08.png" alt=""> <h2 id="8">(e)</h2>
 <pre class="codeinput">xxlinear = linearInterpolation(xx3, 3);
 show_img(xxlinear);
 title(<span class="string">'Reconstruction with Linear Interpolation'</span>);
 </pre>
 <pre class="codeoutput">Image being scaled so that min value is 0 and max value is 255
 </pre>
-<img vspace="5" hspace="5" src="main_09.png" alt=""> <h2 id="9">3.2 f)</h2>
+<img vspace="5" hspace="5" src="LabExercise3_09.png" alt=""> <h2 id="9">(f)</h2>
 <p>xxlinear is a pixelated version of 'lighthouse'. It looks very similar but many details were lost in the orignal downsampling. The reconstruction process has smoothed the edges of the original image. Linear interpolation is incapable of removing the aliasing effects.</p>
-<h2 id="10">3.2 g)</h2>
+<h2 id="10">(g)</h2>
 <p>The zero-order hold generally looks more pixelated than the linear interpolation but it is a little better at preserving the sharper edges of the original image. The biggest area of difference is along the fence, which is a high frequency component. The zero-order hold makes the edges appear sharper while the linear imterpolation smoothes it instead. The low frequency areas of the image, like the sky or the bricks on the lighthouse, looks about the same between the two reconstruction methods. Both methods work best for low frequency components and each has a different effect on high frequency components.</p>
 <p class="footer">
 <br>
@@ -245,7 +243,7 @@ title('Lighthouse Image Downsampled by 2');
 % when there are straight lines in the original image. The fence shows the
 % aliasing effects most dramatically.
 
-%% 3.1 b)
+%% b)
 % The fence posts act as a high freqency component.
 % When we perform the downsampling, those high freqencies alias
 % to a much lower frequency, causing the distortion. To avoid aliasing,
@@ -265,7 +263,7 @@ xx3 = xx(1:3:end, 1:3:end);
 show_img(xx3);
 title('Lighthouse Image Downsampled by 3');
 
-%% 3.2 a)
+%% (a)
 % This section of code demonstrates a zero order hold
 xr1 = (-2) .^ (0:6);
 L = length(xr1);
@@ -282,10 +280,9 @@ title("Plot of xr1 with 4-point zero order hold")
 % The interpolation factor is 4 because one point from the original signal
 % corresponds to 4 points after interpolation. The plot shows this idea.
 
-%% 3.2 b)
+%% (b) Zero-order hold
 
-% For xholdrows, we expand the downsampled image horizontally, along the 
-% rows.
+% For xholdrows, we expand downsamples image horizontally, along the rows.
 
 % When using size(), the return value is an array of 2 elements. The first
 % is the number of rows. The second is the number of elements.
@@ -303,7 +300,7 @@ title('Image With Rows Reconstructed by Zero-Order Hold');
 % xx3 is 109x142 and xholdrows is 109x426
 % xholdrows looks just like xx3 except it is stretched horizontally
 
-%% 3.2 c) 
+%% (c) 
 % Use zero order hold to reconstruct the image
 xholdrowsSize = size(xholdrows);
 columnwiseSamplePoints = ceil((0.999:1:3*xholdrowsSize(1))/3);
@@ -318,7 +315,7 @@ title('Image Reconstructed with Zero-Order Hold');
 % It has the same resolution as the original but also
 % includes the aliasing artifacts introduced by downsampling.
 
-%% 3.2 d)
+%% (d)
 % This section of code demonstrates a linear interpolation
 n1 = 0:6;
 xr1 = (-2).^n1;
@@ -329,20 +326,18 @@ stem(tti,xr1linear)
 title('Example of Linear Interpolation');
 % As can be seen by tti = 0:0.1:6;, the interpolation factor is 1/0.1 = 10.
 
-%% 3.2 e)
-% The function linearInterpolation() is used to perform linear 
-% interpolation on the lighthouse image.
+%% (e)
 xxlinear = linearInterpolation(xx3, 3);
 show_img(xxlinear);
 title('Reconstruction with Linear Interpolation');
 
-%% 3.2 f)
+%% (f)
 % xxlinear is a pixelated version of 'lighthouse'. It looks very similar
 % but many details were lost in the orignal downsampling.
 % The reconstruction process has smoothed the edges of the original image.
 % Linear interpolation is incapable of removing the aliasing effects.
 
-%% 3.2 g)
+%% (g)
 % The zero-order hold generally looks more pixelated than the linear
 % interpolation but it is a little better at preserving the sharper
 % edges of the original image.

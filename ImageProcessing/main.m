@@ -53,7 +53,8 @@ title("Plot of xr1 with 4-point zero order hold")
 
 %% 3.2 b)
 
-% For xholdrows, we expand downsamples image horizontally, along the rows.
+% For xholdrows, we expand the downsampled image horizontally, along the 
+% rows.
 
 % When using size(), the return value is an array of 2 elements. The first
 % is the number of rows. The second is the number of elements.
@@ -98,6 +99,8 @@ title('Example of Linear Interpolation');
 % As can be seen by tti = 0:0.1:6;, the interpolation factor is 1/0.1 = 10.
 
 %% 3.2 e)
+% The function linearInterpolation() is used to perform linear 
+% interpolation on the lighthouse image.
 xxlinear = linearInterpolation(xx3, 3);
 show_img(xxlinear);
 title('Reconstruction with Linear Interpolation');
