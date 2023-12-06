@@ -1,0 +1,356 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>Lab Exercise 3</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2023-11-30">
+<meta name="DC.source" content="LabExercise3.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h1>Lab Exercise 3</h1>
+<!--introduction-->
+<p>This exercise is about downsampling and reconstruction of an image</p>
+<!--/introduction-->
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">3.1 a)</a>
+</li>
+<li>
+<a href="#2">b)</a>
+</li>
+<li>
+<a href="#3">3.2</a>
+</li>
+<li>
+<a href="#4">(a)</a>
+</li>
+<li>
+<a href="#5">(b) Zero-order hold</a>
+</li>
+<li>
+<a href="#6">(c)</a>
+</li>
+<li>
+<a href="#7">(d)</a>
+</li>
+<li>
+<a href="#8">(e)</a>
+</li>
+<li>
+<a href="#9">(f)</a>
+</li>
+<li>
+<a href="#10">(g)</a>
+</li>
+</ul>
+</div>
+<h2 id="1">3.1 a)</h2>
+<pre class="codeinput">load <span class="string">lighthouse</span>;    <span class="comment">% Load image into Matlab 2-D array</span>
+show_img(xx);
+title(<span class="string">'Original Lighthouse Image'</span>);
+xxDownsampled = xx(1:2:end, 1:2:end);   <span class="comment">% Take every other sample</span>
+show_img(xxDownsampled);
+title(<span class="string">'Lighthouse Image Downsampled by 2'</span>);
+<span class="comment">% Visually, aliasing appears when objects seem to merge together or morph</span>
+<span class="comment">% into something different. Information about objects in the image is lost</span>
+<span class="comment">% when there is aliasing. The downsampled image is more jagged, especially</span>
+<span class="comment">% when there are straight lines in the original image. The fence shows the</span>
+<span class="comment">% aliasing effects most dramatically.</span>
+</pre>
+<pre class="codeoutput">Image being scaled so that min value is 0 and max value is 255
+Image being scaled so that min value is 0 and max value is 255
+</pre>
+<img vspace="5" hspace="5" src="LabExercise3_01.png" alt=""> <img vspace="5" hspace="5" src="LabExercise3_02.png" alt=""> <h2 id="2">b)</h2>
+<p>The fence posts act as a high freqency component. When we perform the downsampling, those high freqencies alias to a much lower frequency, causing the distortion. To avoid aliasing, we must either increase our sampling frequency to at least twice the highest frequency, or we must send the image through a low-pass filter so that condition is still satisfied.</p>
+<p>In terms of cycles per pixel, when downsampling by two, the sample rate is 1 sample per 2 pixels or 0.5 samples per pixel. To avoid aliasing, we need to have a signal have 0.25 samples per pixel or less. Equivalently, we need the signal to have a period of 4 pixels or more. If we inspect the fence, we can see aliasing happens when there are more than one fence post per 4 pixels.</p>
+<h2 id="3">3.2</h2>
+<pre class="codeinput">xx3 = xx(1:3:end, 1:3:end);
+show_img(xx3);
+title(<span class="string">'Lighthouse Image Downsampled by 3'</span>);
+</pre>
+<pre class="codeoutput">Image being scaled so that min value is 0 and max value is 255
+</pre>
+<img vspace="5" hspace="5" src="LabExercise3_03.png" alt=""> <h2 id="4">(a)</h2>
+<p>This section of code demonstrates a zero order hold</p>
+<pre class="codeinput">xr1 = (-2) .^ (0:6);
+L = length(xr1);
+nn = ceil((0.999:1:4*L)/4);
+xr1hold = xr1(nn);
+figure;
+stem(0:length(xr1)-1, xr1)
+title(<span class="string">"Plot of xr1"</span>)
+figure;
+stem(0:length(xr1hold)-1, xr1hold)
+title(<span class="string">"Plot of xr1 with 4-point zero order hold"</span>)
+
+<span class="comment">% Note nn holds the values for 4 samples: 1, 1, 1, 1, 2, 2, 2, 2, ...</span>
+<span class="comment">% The interpolation factor is 4 because one point from the original signal</span>
+<span class="comment">% corresponds to 4 points after interpolation. The plot shows this idea.</span>
+</pre>
+<img vspace="5" hspace="5" src="LabExercise3_04.png" alt=""> <img vspace="5" hspace="5" src="LabExercise3_05.png" alt=""> <h2 id="5">(b) Zero-order hold</h2>
+<pre class="codeinput">
+<span class="comment">% For xholdrows, we expand downsamples image horizontally, along the rows.</span>
+
+<span class="comment">% When using size(), the return value is an array of 2 elements. The first</span>
+<span class="comment">% is the number of rows. The second is the number of elements.</span>
+
+xx3Size = size(xx3);
+rowwiseSamplePoints = ceil((0.999:1:3*xx3Size(2))/3);
+xholdrows = zeros(xx3Size(1), 3*xx3Size(2));
+<span class="keyword">for</span> i=1:xx3Size(1)
+    xholdrows(i, :) = xx3(i, rowwiseSamplePoints);
+<span class="keyword">end</span>
+show_img(xholdrows);
+title(<span class="string">'Image With Rows Reconstructed by Zero-Order Hold'</span>);
+
+<span class="comment">% whos %(this prints the sizes of variables)</span>
+<span class="comment">% xx3 is 109x142 and xholdrows is 109x426</span>
+<span class="comment">% xholdrows looks just like xx3 except it is stretched horizontally</span>
+</pre>
+<pre class="codeoutput">Image being scaled so that min value is 0 and max value is 255
+</pre>
+<img vspace="5" hspace="5" src="LabExercise3_06.png" alt=""> <h2 id="6">(c)</h2>
+<p>Use zero order hold to reconstruct the image</p>
+<pre class="codeinput">xholdrowsSize = size(xholdrows);
+columnwiseSamplePoints = ceil((0.999:1:3*xholdrowsSize(1))/3);
+xhold = zeros(3*xholdrowsSize(1), xholdrowsSize(2));
+<span class="keyword">for</span> j=1:xholdrowsSize(2)
+    xhold(:, j) = xholdrows(columnwiseSamplePoints, j);
+<span class="keyword">end</span>
+show_img(xhold);
+title(<span class="string">'Image Reconstructed with Zero-Order Hold'</span>);
+
+<span class="comment">% xhold looks like a very pixelated version of 'lighthouse'.</span>
+<span class="comment">% It has the same resolution as the original but also</span>
+<span class="comment">% includes the aliasing artifacts introduced by downsampling.</span>
+</pre>
+<pre class="codeoutput">Image being scaled so that min value is 0 and max value is 255
+</pre>
+<img vspace="5" hspace="5" src="LabExercise3_07.png" alt=""> <h2 id="7">(d)</h2>
+<p>This section of code demonstrates a linear interpolation</p>
+<pre class="codeinput">n1 = 0:6;
+xr1 = (-2).^n1;
+tti = 0:0.1:6;   <span class="comment">%-- locations between the n1 indices</span>
+xr1linear = interp1(n1,xr1,tti);   <span class="comment">%-- function is INTERP-ONE</span>
+figure
+stem(tti,xr1linear)
+title(<span class="string">'Example of Linear Interpolation'</span>);
+<span class="comment">% As can be seen by tti = 0:0.1:6;, the interpolation factor is 1/0.1 = 10.</span>
+</pre>
+<img vspace="5" hspace="5" src="LabExercise3_08.png" alt=""> <h2 id="8">(e)</h2>
+<pre class="codeinput">xxlinear = linearInterpolation(xx3, 3);
+show_img(xxlinear);
+title(<span class="string">'Reconstruction with Linear Interpolation'</span>);
+</pre>
+<pre class="codeoutput">Image being scaled so that min value is 0 and max value is 255
+</pre>
+<img vspace="5" hspace="5" src="LabExercise3_09.png" alt=""> <h2 id="9">(f)</h2>
+<p>xxlinear is a pixelated version of 'lighthouse'. It looks very similar but many details were lost in the orignal downsampling. The reconstruction process has smoothed the edges of the original image. Linear interpolation is incapable of removing the aliasing effects.</p>
+<h2 id="10">(g)</h2>
+<p>The zero-order hold generally looks more pixelated than the linear interpolation but it is a little better at preserving the sharper edges of the original image. The biggest area of difference is along the fence, which is a high frequency component. The zero-order hold makes the edges appear sharper while the linear imterpolation smoothes it instead. The low frequency areas of the image, like the sky or the bricks on the lighthouse, looks about the same between the two reconstruction methods. Both methods work best for low frequency components and each has a different effect on high frequency components.</p>
+<p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%% Lab Exercise 3
+% This exercise is about downsampling and reconstruction of an image
+
+%% 3.1 a)
+load lighthouse;    % Load image into Matlab 2-D array
+show_img(xx);
+title('Original Lighthouse Image');
+xxDownsampled = xx(1:2:end, 1:2:end);   % Take every other sample
+show_img(xxDownsampled);
+title('Lighthouse Image Downsampled by 2');
+% Visually, aliasing appears when objects seem to merge together or morph
+% into something different. Information about objects in the image is lost
+% when there is aliasing. The downsampled image is more jagged, especially
+% when there are straight lines in the original image. The fence shows the
+% aliasing effects most dramatically.
+
+%% b)
+% The fence posts act as a high freqency component.
+% When we perform the downsampling, those high freqencies alias
+% to a much lower frequency, causing the distortion. To avoid aliasing,
+% we must either increase our sampling frequency to at least twice
+% the highest frequency, or we must send the image through a low-pass
+% filter so that condition is still satisfied.
+%
+% In terms of cycles per pixel, when downsampling by two, the sample rate
+% is 1 sample per 2 pixels or 0.5 samples per pixel. To avoid aliasing, we
+% need to have a signal have 0.25 samples per pixel or less. Equivalently,
+% we need the signal to have a period of 4 pixels or more. If we inspect
+% the fence, we can see aliasing happens when there are more than one fence
+% post per 4 pixels.
+
+%% 3.2
+xx3 = xx(1:3:end, 1:3:end);
+show_img(xx3);
+title('Lighthouse Image Downsampled by 3');
+
+%% (a)
+% This section of code demonstrates a zero order hold
+xr1 = (-2) .^ (0:6);
+L = length(xr1);
+nn = ceil((0.999:1:4*L)/4);
+xr1hold = xr1(nn);
+figure;
+stem(0:length(xr1)-1, xr1)
+title("Plot of xr1")
+figure;
+stem(0:length(xr1hold)-1, xr1hold)
+title("Plot of xr1 with 4-point zero order hold")
+
+% Note nn holds the values for 4 samples: 1, 1, 1, 1, 2, 2, 2, 2, ...
+% The interpolation factor is 4 because one point from the original signal
+% corresponds to 4 points after interpolation. The plot shows this idea.
+
+%% (b) Zero-order hold
+
+% For xholdrows, we expand downsamples image horizontally, along the rows.
+
+% When using size(), the return value is an array of 2 elements. The first
+% is the number of rows. The second is the number of elements.
+
+xx3Size = size(xx3); 
+rowwiseSamplePoints = ceil((0.999:1:3*xx3Size(2))/3);
+xholdrows = zeros(xx3Size(1), 3*xx3Size(2));
+for i=1:xx3Size(1)
+    xholdrows(i, :) = xx3(i, rowwiseSamplePoints);
+end
+show_img(xholdrows);
+title('Image With Rows Reconstructed by Zero-Order Hold');
+
+% whos %(this prints the sizes of variables)
+% xx3 is 109x142 and xholdrows is 109x426
+% xholdrows looks just like xx3 except it is stretched horizontally
+
+%% (c) 
+% Use zero order hold to reconstruct the image
+xholdrowsSize = size(xholdrows);
+columnwiseSamplePoints = ceil((0.999:1:3*xholdrowsSize(1))/3);
+xhold = zeros(3*xholdrowsSize(1), xholdrowsSize(2));
+for j=1:xholdrowsSize(2)
+    xhold(:, j) = xholdrows(columnwiseSamplePoints, j);
+end
+show_img(xhold);
+title('Image Reconstructed with Zero-Order Hold');
+
+% xhold looks like a very pixelated version of 'lighthouse'.
+% It has the same resolution as the original but also
+% includes the aliasing artifacts introduced by downsampling.
+
+%% (d)
+% This section of code demonstrates a linear interpolation
+n1 = 0:6;
+xr1 = (-2).^n1;
+tti = 0:0.1:6;   %REPLACE_WITH_DASH_DASH locations between the n1 indices
+xr1linear = interp1(n1,xr1,tti);   %REPLACE_WITH_DASH_DASH function is INTERP-ONE
+figure
+stem(tti,xr1linear)
+title('Example of Linear Interpolation');
+% As can be seen by tti = 0:0.1:6;, the interpolation factor is 1/0.1 = 10.
+
+%% (e)
+xxlinear = linearInterpolation(xx3, 3);
+show_img(xxlinear);
+title('Reconstruction with Linear Interpolation');
+
+%% (f)
+% xxlinear is a pixelated version of 'lighthouse'. It looks very similar
+% but many details were lost in the orignal downsampling.
+% The reconstruction process has smoothed the edges of the original image.
+% Linear interpolation is incapable of removing the aliasing effects.
+
+%% (g)
+% The zero-order hold generally looks more pixelated than the linear
+% interpolation but it is a little better at preserving the sharper
+% edges of the original image.
+% The biggest area of difference is along the fence, which is a high
+% frequency component. The zero-order hold makes the edges appear sharper
+% while the linear imterpolation smoothes it instead. The low frequency
+% areas of the image, like the sky or the bricks on the lighthouse, looks
+% about the same between the two reconstruction methods.
+% Both methods work best for low frequency components and each has a 
+% different effect on high frequency components.
+
+
+##### SOURCE END #####
+-->
+</body>
+</html>

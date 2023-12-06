@@ -1,6 +1,7 @@
 function y = linearInterpolation(x, interpolationFactor)
-    % This function takes a matrix x and an interpolation factor
-    % interpolationFactor.
+    % linearInterpolation(x, interpolationFactor)
+    % This function performs linear interpolation on the matrix x. The
+    % interpolation factor is interpolationFactor.
     xSize = size(x);
     % if the original size is N, and the interpolation factor is a, the 
     % result after interpolation is of size (N-1)*a + 1.
