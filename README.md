@@ -18,19 +18,20 @@ run the Matlab scripts in this project. This toolbox is included in this
 repository as the `DSP First Toolbox` directory. After this directory and its
 contents are on your local machine (clone the repo) do the following:
 1. Open Matlab.
-1. Under the "Home" tab, in the "Environment" section, click "Set Path".
-1. Click "Add with subfolders" and select the `DSP First Toolbox`.
-1. Matlab should now be able to use the DSP First Toolbox.
+1. Within Matlab, navigate to this repository's directory ("ECE6530Project").
+1. Within Matlab, type the command `addpath("DSP First Toolbox")`.
+1. Matlab should now be able to use the toolbox. The Matlab removes this path
+   when the Matlab application exits.
 
 ## How to Run Code
-After ensuring the DSP First Toolbox is installed, the Matlab scripts can be
-run. The `main.m` scripts should be run from *within* the containing directory.
+After Matlab has added the toolbox to its path, the Matlab scripts can be run.
+The `main.m` scripts should be run from *within* the containing directory.
 
 For the digital images lab, the `main.m` script is located in
 `ImageProcessing/LabP8_Exercise3`.
 
 For the spectrograms lab, the `main.m` scripts are located in
-`ChripSpectrogram/<sub directories starting with Lab>`.
+`ChripSpectrogram/LabS8_Exercise2`.
 
 In the same directories that have `main.m`, there are `html` directories which
 contain `main.html`. These are the published Matlab reports.
