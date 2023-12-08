@@ -15,8 +15,8 @@ script the runs the code for the project.
 ## Required Software
 The labs from GT utilize their *DSP First Toolbox*. This toolbox is required to
 run the Matlab scripts in this project. This toolbox is included in this
-repository the `DSP First Toolbox` directory. After this directory and it
-contents is on your local machine (clone the repo):
+repository as the `DSP First Toolbox` directory. After this directory and its
+contents are on your local machine (clone the repo) do the following:
 1. Open Matlab.
 1. Under the "Home" tab, in the "Environment" section, click "Set Path".
 1. Click "Add with subfolders" and select the `DSP First Toolbox`.
@@ -25,8 +25,10 @@ contents is on your local machine (clone the repo):
 ## How to run code
 After ensuring the DSP First Toolbox is installed, the Matlab scripts can be
 run. The `main.m` scripts should be run from *within* the containing directory.
-For example, to run code in `ImageProcessing/`, Matlab should be working from
-within this directory.
 
+For the digital images lab, the `main.m` script is located in
+`ImageProcessing/LabP8_Exercise3`.
 
+For the spectrograms lab, the `main.m` scripts are located in
+`ChripSpectrogram/<sub directoriesstarting with Lab>`.
 
