@@ -1,6 +1,32 @@
 # ECE6530Project
- This is a repository containing Matlab code and other files for an ECE 6530
- project. The project goes over a [*Sampling and Aliasing*
- lab](https://dspfirst.gatech.edu/chapters/04samplin/overview.html) from the
- Georgia Institute of Technology.
+This is a repository containing Matlab code and other files for an ECE 6530
+project. The project goes over a [*Sampling and Aliasing*
+unit](https://dspfirst.gatech.edu/chapters/04samplin/overview.html) from the
+Georgia Institute of Technology (GT).
+
+Within *Sampling and Aliasing*, there are two Matlab labs: **Lab P-8** and **Lab
+S-8**. Lab P-8 goes over digital images, and Lab S-8 goes over spectrographs.
+The Matlab code for this project is located in the following locations:
+* Lab P-8 (digital images) is located in `ImageProcessing/`
+* Lab S-8 (spectrograms) is located in `ChirpSpectrogram/`.
+In each of these directors, there is a `main.m` Matlab file. This is the main
+script the runs the code for the project.
+
+## Required Software
+The labs from GT utilize their *DSP First Toolbox*. This toolbox is required to
+run the Matlab scripts in this project. This toolbox is included in this
+repository the `DSP First Toolbox` directory. After this directory and it
+contents is on your local machine (clone the repo):
+1. Open Matlab.
+1. Under the "Home" tab, in the "Environment" section, click "Set Path".
+1. Click "Add with subfolders" and select the `DSP First Toolbox`.
+1. Matlab should now be able to use the DSP First Toolbox.
+
+## How to run code
+After ensuring the DSP First Toolbox is installed, the Matlab scripts can be
+run. The `main.m` scripts should be run from *within* the containing directory.
+For example, to run code in `ImageProcessing/`, Matlab should be working from
+within this directory.
+
+
 
