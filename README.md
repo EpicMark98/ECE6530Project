@@ -30,5 +30,5 @@ For the digital images lab, the `main.m` script is located in
 `ImageProcessing/LabP8_Exercise3`.
 
 For the spectrograms lab, the `main.m` scripts are located in
-`ChripSpectrogram/<sub directoriesstarting with Lab>`.
+`ChripSpectrogram/<sub directories starting with Lab>`.
 
