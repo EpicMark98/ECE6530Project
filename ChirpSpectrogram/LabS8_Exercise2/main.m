@@ -1,4 +1,61 @@
-%% Sampling and Aliasing: Lab S-8: 2.2 Spectrogram of a Periodic Signal
+%% Sampling and Aliasing: Lab S-8: 2 Lab Exercise
+
+%% 2.1a)
+% When the frequency continues to rise above half the sampling rate, the 
+% frequency aliases backwards, and will continue until it aliases to 0Hz 
+% and then will continue to oscillate.
+%
+% Mu is the half the slope of the change in frequency, so
+% μ = (11,000Hz – 1,000Hz) ÷ (4s – 0s) ÷ 2 = 1,250
+%
+% F-sub-zero is the starting frequency, so f_0 = 1,000Hz
+% 
+% Phi is the phase offset, which is not defined, so we choose φ = 0.
+% 
+%  Chirp formula: cos(ψ(t)) = 2π(1250)t^2 + 2π(1000)t + 0
+
+%% 2.1b)
+%  Here we generate a spectrogram using L_sect as 128
+
+fSamp = 4000; % Hertz
+dt = 1/fSamp; % seconds
+tStart = 0; % seconds
+tStop = 4; % seconds
+tt = tStart:dt:tStop;
+fStart = 1000; % Hertz
+fStop = 11000; % Hertz
+mu = ((fStop-fStart)/(tStop-tStart))/2;
+fzero = fStart; % Hertz
+phi = 0;
+psi = 2*pi*mu*tt.^2 + 2*pi*fzero*tt + phi;
+cc = real(7.7*exp(1j*psi));
+lSect = 128; % should be a power of 2
+%soundsc(cc, fSamp); % plays the sound
+figure
+plotspec(cc + 1j*1e-12, fSamp, lSect)
+colorbar
+grid on
+%%%
+% L_sect represents a certain number of samples. Since the sampling rate is
+% 4000Hz, which is a sampling period of 0.25ms, the T_sect is L_sect times
+% the sampling period (lSect*dt) which is 32ms when L_sect equals 128.
+% 
+%  L_sect = 128 samples    T_sect = 0.032 s
+
+%% 2.1c)
+% As the frequency reaches half of the sampling frequency, the samples
+% occur at two equal amplitude but opposite sign points in the sinusoid. As
+% the frequency increases to exactly the sampling rate, the samples occur
+% at the same point in the sinusoid at each sample, the the sampled signal
+% appears to not be moving and have a frequency of 0 Hz. This is why the
+% sampled frequency reverses at half the sampling frequency and continues
+% down to 0 Hz. Once the frequency continue above the sampling frequency,
+% the samples are taken slight further ahead in the cycle each time,
+% resulting in a small sampled frequency. This continues to increase until
+% reaching 1.5 times the sampling frequency where it is again sampling
+% opposite amplitudes, but this time a cycle apart instead of within the
+% same cycle. The original effect then occurs and it cycles up and down,
+% never reaching the actual frequency being sampled.
 
 %% 2.2.1a)
 % This is a simple script that generates a triangle wave given parameters.
@@ -161,3 +218,55 @@ plotspecDB(xx + 1j*1e-12, fSamp, lSect, 80)
 colorbar
 grid on
 title('4ms Triangle dB Spectrogram')
+
+%% 2.3.1)
+% Here we load in a 7-second voice sample to find the "AAH" sound and zoom
+% in on it.
+
+load('48000_bicycle_built_for_two.mat', 'data');
+fSamp = 48000;
+vv = data(370000:end, 1)'; % gets the left channel, second half of audio
+tSect = 0.025;
+lSect = round(tSect*fSamp); % must be an integer
+%soundsc(vv, fSamp);
+figure
+plotspecDB(vv + 1j*1e-12, fSamp, lSect, 80)
+axis([1.25, 2.275, 0, fSamp/16])
+colorbar
+grid on
+title("'Half'")
+%%%
+% After some testing, Tsect of 25ms gave the cleanest vowel lines.
+% Multiplying this by the sampling frequency gives the Lsect, which is
+% 1200.
+%
+%  T_sect = 0.025 s    L_sect = 1200 samples
+%
+% <<voice_spectrogram.png>>
+%
+% The 'a' vowel from the word "half" is annotated in the red box.
+
+%% 2.3.2)
+% The short 'a' vowel has a fundamental frequency of about 200Hz (G3). This
+% corresponds to a fundamental period of 5ms.
+% 
+%  Fundamental Frequency = 200 Hz  Fundamental Period = 0.005 s
+
+%% 2.3.3)
+figure
+plot(vv(69800:105600), 'k-')
+axis([15150, 16150, -1, 1])
+title("'a' Vowel")
+%%%
+% By directly measuring the distance between the peaks in the waveform, we
+% found an average difference of 233 samples, which is 4.85ms. This is very
+% close to the 5ms found in 2.3.2: a difference of only 6Hz.
+
+%% 2.3.4)
+% By measuring the distances between peaks in the time domain plot, I was
+% able to find a very accurate value for the fundamental period during
+% that very small amount of time. By instead finding the fundamental
+% frequency from the frequency domain plot, I could only find what seemed
+% to be the middle of the darkest line, which may have made the measurement
+% less accurate, however, the frequency domain gave a much better idea of
+% what the average frequency over a large amount of time was.
