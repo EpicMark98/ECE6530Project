@@ -7,8 +7,8 @@ Georgia Institute of Technology (GT).
 Within *Sampling and Aliasing*, there are two Matlab labs: **Lab P-8** and **Lab
 S-8**. Lab P-8 goes over digital images, and Lab S-8 goes over spectrographs.
 The Matlab code for this project is located in the following locations:
-* Lab P-8 (digital images) is located in `ImageProcessing/`
-* Lab S-8 (spectrograms) is located in `ChirpSpectrogram/`.
+* Lab P-8 (digital images) is located in `ImageProcessing`
+* Lab S-8 (spectrograms) is located in `ChirpSpectrogram`.
 In each of these directors, there is a `main.m` Matlab file. This is the main
 script the runs the code for the project.
 
@@ -22,7 +22,7 @@ contents are on your local machine (clone the repo) do the following:
 1. Click "Add with subfolders" and select the `DSP First Toolbox`.
 1. Matlab should now be able to use the DSP First Toolbox.
 
-## How to run code
+## How to Run Code
 After ensuring the DSP First Toolbox is installed, the Matlab scripts can be
 run. The `main.m` scripts should be run from *within* the containing directory.
 
@@ -32,3 +32,5 @@ For the digital images lab, the `main.m` script is located in
 For the spectrograms lab, the `main.m` scripts are located in
 `ChripSpectrogram/<sub directories starting with Lab>`.
 
+In the same directories that have `main.m`, there are `html` directories which
+contain `main.html`. These are the published Matlab reports.
